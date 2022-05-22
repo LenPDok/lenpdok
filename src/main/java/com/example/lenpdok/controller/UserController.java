@@ -3,25 +3,30 @@ package com.example.lenpdok.controller;
 import com.example.lenpdok.model.User;
 import com.example.lenpdok.model.UserDto;
 import com.example.lenpdok.service.UserService;
+import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 
+@RequiredArgsConstructor
 @RestController
 @RequestMapping("/api")
 public class UserController {
     private final UserService userService;
 
-    public UserController(UserService userService) {
-        this.userService = userService;
+    @GetMapping("/signup")
+    public ModelAndView signupPage() {
+        return new ModelAndView("/login/registration");
     }
 
     @PostMapping("/signup")
-    public ResponseEntity<UserDto> signup(@Valid @RequestBody UserDto userDto) {
-        return ResponseEntity.ok(userService.signup(userDto));
+    public ModelAndView signup(UserDto userDto) {
+        userService.signup(userDto);
+        return new ModelAndView("home");
     }
 
     @GetMapping("/user")

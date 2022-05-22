@@ -1,7 +1,8 @@
 package com.example.lenpdok.service;
 
-import com.example.lenpdok.mapper.UserMapper;
+import com.example.lenpdok.mapper.UserRepository;
 import com.example.lenpdok.model.User;
+import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 
@@ -14,18 +15,15 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.List;
 import java.util.stream.Collectors;
 
+@RequiredArgsConstructor
 @Component("userDetailsService")
 public class CustomUserDetailsService implements UserDetailsService {
-    private final UserMapper userMapper;
-
-    public CustomUserDetailsService(UserMapper userMapper) {
-        this.userMapper = userMapper;
-    }
+    private final UserRepository userRepository;
 
     @Override
     @Transactional
     public UserDetails loadUserByUsername(final String username) {
-        return userMapper.findOneWithAuthoritiesByUsername(username)
+        return userRepository.findOneWithAuthoritiesByUsername(username)
                 .map(user -> createUser(username, user))
                 .orElseThrow(() -> new UsernameNotFoundException(username + " -> 데이터베이스에서 찾을 수 없습니다."));
     }

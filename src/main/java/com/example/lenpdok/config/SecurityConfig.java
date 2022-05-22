@@ -4,6 +4,7 @@ import com.example.lenpdok.jwt.JwtAccessDeniedHandler;
 import com.example.lenpdok.jwt.JwtAuthenticationEntryPoint;
 import com.example.lenpdok.jwt.JwtSecurityConfig;
 import com.example.lenpdok.jwt.TokenProvider;
+import org.springframework.boot.autoconfigure.security.servlet.PathRequest;
 import org.springframework.context.annotation.Bean;
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -42,7 +43,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         web.ignoring()
                 .antMatchers(
                         "/favicon.ico"
-                );
+                )
+                .requestMatchers(PathRequest.toStaticResources().atCommonLocations());
     }
 
     @Override
@@ -57,21 +59,22 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
                 // 세션을 사용하지 않기 때문에 STATELESS로 설정
                 .and()
-                .sessionManagement()
-                .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
+                    .sessionManagement()
+                    .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
 
                 .and()
-                .authorizeRequests()
-                .antMatchers("/api/hello").permitAll()
-                .antMatchers("/api/authenticate").permitAll()
-                .antMatchers("/api/signup").permitAll()
+                    .authorizeRequests()
+                        .antMatchers("/api/hello").permitAll()
+                        .antMatchers("/api/authenticate").permitAll()
+                        .antMatchers("/api/signup").permitAll()
 
-                .anyRequest().authenticated()
+                        .antMatchers("/","/login","/home").permitAll()
+                        .antMatchers("/static/**").permitAll()
+                        .antMatchers("/css/**","/image/**").permitAll()
+                        .anyRequest().authenticated()
+
 
                 .and()
-                .apply(new JwtSecurityConfig(tokenProvider))
-
-                .and()
-                .csrf().disable();
+                    .apply(new JwtSecurityConfig(tokenProvider));
     }
 }
