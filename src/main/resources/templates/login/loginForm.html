@@ -4,22 +4,22 @@
   <meta charset="utf-8">
   <link rel="stylesheet" type="text/css" href="/css/login.css">
 </head>
-<body> 
-  <main id="main-holder">
-    <h1 id="login-header">Login</h1>
+<body>
+<main id="main-holder">
+  <h1 id="login-header">Login</h1>
 
-    <div th:if="${param.error == 'fail'}">
-      <p>잘못된 아이디
-        <span>비밀번호 입니다.</span>
-      </p>
-    </div>
-    <form method="post" id="login-form" action="/api/authenticate">
-      <input type="text" name="username" id="username-field" class="login-form-field" placeholder="Username"> 
-      <input type="password" name="password" id="password-field" class="login-form-field" placeholder="Password"> 
-      <input type="submit" value="Login" id="login-form-submit">
-      <button id="login-form-button"><a href="/api/signup">signup</a></button>
-    </form>
-  </main>
+  <div th:if="${param.error == 'fail'}">
+    <p>잘못된 아이디
+      <span>비밀번호 입니다.</span>
+    </p>
+  </div>
+  <form method="post" id="login-form" action="/api/authenticate">
+    <input type="text" name="username" id="username-field" class="login-form-field" placeholder="Username">
+    <input type="password" name="password" id="password-field" class="login-form-field" placeholder="Password">
+    <input type="submit" value="Login" id="login-form-submit">
+    <button id="login-form-button"><a href="/api/signup">signup</a></button>
+  </form>
+</main>
 
 </body>
 

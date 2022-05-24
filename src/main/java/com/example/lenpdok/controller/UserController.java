@@ -10,7 +10,9 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
+import java.io.IOException;
 
 @RequiredArgsConstructor
 @RestController
@@ -24,9 +26,9 @@ public class UserController {
     }
 
     @PostMapping("/signup")
-    public ModelAndView signup(UserDto userDto) {
+    public void signup(UserDto userDto, HttpServletResponse response) throws IOException {
         userService.signup(userDto);
-        return new ModelAndView("home");
+        response.sendRedirect("/main");
     }
 
     @GetMapping("/user")

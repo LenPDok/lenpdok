@@ -59,22 +59,22 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
                 // 세션을 사용하지 않기 때문에 STATELESS로 설정
                 .and()
-                    .sessionManagement()
-                    .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
+                .sessionManagement()
+                .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
 
                 .and()
-                    .authorizeRequests()
-                        .antMatchers("/api/hello").permitAll()
-                        .antMatchers("/api/authenticate").permitAll()
-                        .antMatchers("/api/signup").permitAll()
+                .authorizeRequests()
+                .antMatchers("/api/hello").permitAll()
+                .antMatchers("/api/authenticate").permitAll()
+                .antMatchers("/api/signup").permitAll()
 
-                        .antMatchers("/","/login","/home").permitAll()
-                        .antMatchers("/static/**").permitAll()
-                        .antMatchers("/css/**","/image/**").permitAll()
-                        .anyRequest().authenticated()
+                .antMatchers("/","/login","/home").permitAll()
+                .antMatchers("/static/**").permitAll()
+                .antMatchers("/css/**","/image/**", "/script/**").permitAll()
+//                .anyRequest().authenticated()
 
 
                 .and()
-                    .apply(new JwtSecurityConfig(tokenProvider));
+                .apply(new JwtSecurityConfig(tokenProvider));
     }
 }

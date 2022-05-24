@@ -3,11 +3,9 @@ package com.example.lenpdok.controller;
 import com.example.lenpdok.jwt.JwtFilter;
 import com.example.lenpdok.jwt.TokenProvider;
 import com.example.lenpdok.model.LoginDto;
-import com.example.lenpdok.model.TokenDto;
 import lombok.RequiredArgsConstructor;
+
 import org.springframework.http.HttpHeaders;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.core.Authentication;
@@ -15,7 +13,9 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.servlet.ModelAndView;
+
+import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
 
 @RestController
 @RequestMapping("/api")
@@ -25,7 +25,7 @@ public class AuthController {
     private final AuthenticationManagerBuilder authenticationManagerBuilder;
 
     @PostMapping("/authenticate")
-    public ModelAndView authorize(LoginDto loginDto) {
+    public void authorize(LoginDto loginDto, HttpServletResponse response) throws IOException {
         UsernamePasswordAuthenticationToken authenticationToken =
                 new UsernamePasswordAuthenticationToken(loginDto.getUsername(), loginDto.getPassword());
 
@@ -37,6 +37,6 @@ public class AuthController {
         HttpHeaders httpHeaders = new HttpHeaders();
         httpHeaders.add(JwtFilter.AUTHORIZATION_HEADER, "Bearer " + jwt);
 
-        return new ModelAndView("home");
+        response.sendRedirect("/main");
     }
 }

@@ -17,10 +17,10 @@ public class JwtAuthenticationEntryPoint implements AuthenticationEntryPoint {
     public void commence(HttpServletRequest request,
                          HttpServletResponse response,
                          AuthenticationException authException) throws IOException {
-        // 유효한 자격증명을 제공하지 않고 접근하려 할때 401
+       // 유효한 자격증명을 제공하지 않고 접근하려 할때 401
         response.setContentType("text/html; charset=UTF-8");
         PrintWriter out = response.getWriter();
-        out.println("<script>alert('아이디 또는 비밀번호가 틀렸습니다.'); location.href='/login';</script>");
+        out.println("<script>alert('권한이 없습니다.'); location.href='/login';</script>");
         out.flush();
     }
 }
