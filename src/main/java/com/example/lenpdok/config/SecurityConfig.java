@@ -4,6 +4,7 @@ import com.example.lenpdok.jwt.JwtAccessDeniedHandler;
 import com.example.lenpdok.jwt.JwtAuthenticationEntryPoint;
 import com.example.lenpdok.jwt.JwtSecurityConfig;
 import com.example.lenpdok.jwt.TokenProvider;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.security.servlet.PathRequest;
 import org.springframework.context.annotation.Bean;
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
@@ -23,6 +24,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     private final JwtAuthenticationEntryPoint jwtAuthenticationEntryPoint;
     private final JwtAccessDeniedHandler jwtAccessDeniedHandler;
 
+    @Autowired
     public SecurityConfig(
             TokenProvider tokenProvider,
             JwtAuthenticationEntryPoint jwtAuthenticationEntryPoint,

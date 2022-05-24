@@ -5,7 +5,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR&display=swap" rel="stylesheet">
   <link rel="stylesheet" type="text/css" href="/css/style.css"> <!-- css 참조-->
   <script language="javascript">
-    function showPopup() {window.open("08_2_popup.html", "플래너", "width=400, height=300, left=100, top=50");}
+    function showPopup() {window.open("/write_plan", "플래너", "width=400, height=300, left=100, top=50");}
 
   </script>
 
@@ -40,7 +40,7 @@
   <li>
     <div>
       <div class="contents1">오늘 공부해야 할 것</div>
-      <div class="result">3</div>
+      <div th:text="${planCnt}" class="result"></div>
     </div>
   </li>
   <li>
@@ -106,7 +106,7 @@
       <div class="contents2">
         다른 사람들과 정보를 공유해 보아요
       </div>
-      <div class="more">
+      <div class ="more" onClick="location.href='/community'">
         MORE
       </div>
     </li>
@@ -117,20 +117,10 @@
   <h1>CALANDER</h1>
   <div class="contents1">나만의 시험일정을 기록해 보아요</div>
   <div class="service">
-    <div class="food_photo">
-      <img src="/image/food.png">
+    <div class="food_photo" >
+      <iframe src="https://calendar.google.com/calendar/embed?height=400&wkst=1&bgcolor=%23ffffff&ctz=Asia%2FSeoul&showTitle=0&showCalendars=0&showPrint=0&showTz=0&showTabs=0&showNav=0&title=%20&mode=MONTH&src=YWRkcmVzc2Jvb2sjY29udGFjdHNAZ3JvdXAudi5jYWxlbmRhci5nb29nbGUuY29t&src=a28uc291dGhfa29yZWEjaG9saWRheUBncm91cC52LmNhbGVuZGFyLmdvb2dsZS5jb20&color=%2333B679&color=%230B8043" style="border-width:0" width="600" height="400" frameborder="0" scrolling="yes"></iframe>
     </div>
     <div class="contents2">
-      <h2>6월 시험일정</h2>
-      10일> 컴활자격증<br>
-      - 장소 : 제주고등학교 <br>
-      - 시간 : 오전 11시<br><br>
-      18일> OPIC 시험 <br>
-      - 장소 : 제주관광대학교<br>
-      - 시간 : 오전 10시<br><br>
-      25일> 토익 스피킹 <br>
-      - 장소 : 제주관광대학교<br>
-      - 시간 : 오후 2시<br>
 
       <!-- 총알오징어는, 사실 어떤 특정한 품종을 가진 게 아니랍니다. <br>
       우리가 사먹지 말아야 한다는 것이죠. <br>

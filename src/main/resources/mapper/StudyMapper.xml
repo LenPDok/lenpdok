@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.example.lenpdok.mapper.StudyMapper">
+    <resultMap id="Plan" type="com.example.lenpdok.model.Plan">
+        <result property="id" column="id" />
+        <result property="login_id" column="login_id" />
+        <result property="subject" column="subject" />
+        <result property="title" column="title" />
+        <result property="plan_date" column="plan_date" />
+        <result property="activate" column="activate" />
+    </resultMap>
+
+    <insert id="addPlan">
+        INSERT INTO plan(login_id, subject, title, plan_date, activate)
+            VALUE (1, "과목", #{title}, sysdate(), 0);
+    </insert>
+
+    <select id="getPlanList" resultMap="Plan">
+        SELECT
+            *
+        FROM plan
+        WHERE LOGIN_ID=1
+    </select>
+</mapper>
