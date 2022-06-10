@@ -1,7 +1,7 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
   <title> login</title>
-  <meta charset="utf-8">
+  <meta charSet="utf-8">
   <link rel="stylesheet" type="text/css" href="/css/login.css">
 </head>
 <body>
@@ -13,14 +13,39 @@
       <span>비밀번호 입니다.</span>
     </p>
   </div>
-  <form method="post" id="login-form" action="/api/authenticate">
-    <input type="text" name="username" id="username-field" class="login-form-field" placeholder="Username">
-    <input type="password" name="password" id="password-field" class="login-form-field" placeholder="Password">
-    <input type="submit" value="Login" id="login-form-submit">
-    <button id="login-form-button"><a href="/api/signup">signup</a></button>
-  </form>
+  <input type="text" name="username" id="username-field" className="login-form-field" placeholder="Username">
+  <input type="password" name="password" id="password-field" className="login-form-field" placeholder="Password">
+  <input type="submit" value="Login" id="login-form-submit">
+  <button id="login-form-button">signup</button>
 </main>
+<script>
+  function login() {
+    let $name = document.querySelector("#username-field");
+    let $pwd = document.querySelector("#password-field");
+    fetch("/api/authenticate", {
+      method: 'post',
+      headers: {
+        'content-type': 'application/json'
+      },
+      body: JSON.stringify({
+        username: $name.value,
+        password: $pwd.value
+      })
+    }).then(res => res.json())
+            .then(token => {
+              if(token.status !== 401) {
+                localStorage.setItem("jwt", "Bearer " + token.token);
+                alert("로그인 되었습니다");
+                location.href = "/main";
+              } else {
+                alert("아이디 또는 비밀번호를 확인해주세요.");
+              }
+            });
+  }
 
+  const $loginButton = document.querySelector("#login-form-submit");
+  $loginButton.addEventListener("click", login);
+</script>
 </body>
 
 </html>

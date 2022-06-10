@@ -16,8 +16,8 @@ public class StudyService {
         studyMapper.addPlan(plan.getTitle());
     }
 
-    public List<Plan> getPlanList(int user_id) {
-        return studyMapper.getPlanList(user_id);
+    public List<Plan> getPlanList(String username) {
+        return studyMapper.getPlanList(username);
     }
 
     public void delete(int plan_id) {

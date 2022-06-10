@@ -38,6 +38,7 @@ public class TokenProvider implements InitializingBean {
             @Value("${jwt.token-validity-in-seconds}") long tokenValidityInSeconds) {
         this.secret = secret;
         this.tokenValidityInMilliseconds = tokenValidityInSeconds * 1000;
+//        this.refreshTokenValidityInMilliseconds = refreshTokenValidityInSeconds * 1000;
     }
 
     //Bean이 생성이 되고, 의존성 주입을 받은 후에 secret 값을 Base64 Decode 해서 key 변수에 할당합니다.
@@ -62,6 +63,16 @@ public class TokenProvider implements InitializingBean {
                 .setExpiration(validity)
                 .compact();
     }
+
+    // 기간문제로 보류
+//    public String createRefreshToken() {
+//        long now = (new Date()).getTime();
+//        Date validity = new Date(now + this.refreshTokenValidityInMilliseconds);
+//        return Jwts.builder()
+//                .signWith(key, SignatureAlgorithm.HS512)
+//                .setExpiration(validity)
+//                .compact();
+//    }
 
     public Authentication getAuthentication(String token) {
         Claims claims = Jwts

@@ -21,6 +21,7 @@
         SELECT
             *
         FROM plan
-        WHERE LOGIN_ID=1
+        WHERE LOGIN_ID=#{user_id}
+          AND DATE(plan_date) = date_format(SYSDATE(), '%Y-%m-%d');
     </select>
 </mapper>

@@ -1,6 +1,7 @@
 package com.example.lenpdok.mapper;
 
 import com.example.lenpdok.model.User;
+import org.apache.ibatis.annotations.Mapper;
 import org.springframework.data.jpa.repository.EntityGraph;
 import org.springframework.data.jpa.repository.JpaRepository;
 

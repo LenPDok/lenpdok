@@ -10,7 +10,7 @@ import java.util.List;
 public interface StudyMapper {
     void addPlan(@Param("title") String title);
 
-    List<Plan> getPlanList(int user_id);
+    List<Plan> getPlanList(@Param("username") String username);
 
     void deletePlan(@Param("id") int id);
 }

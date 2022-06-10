@@ -11,9 +11,11 @@ import javax.servlet.FilterChain;
 import javax.servlet.ServletException;
 import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
+import javax.servlet.annotation.WebFilter;
 import javax.servlet.http.HttpServletRequest;
 import java.io.IOException;
 
+@WebFilter
 public class JwtFilter  extends GenericFilterBean {
     private static final Logger logger = LoggerFactory.getLogger(JwtFilter.class);
 
@@ -39,6 +41,7 @@ public class JwtFilter  extends GenericFilterBean {
             SecurityContextHolder.getContext().setAuthentication(authentication);
             logger.debug("Security Context에 '{}' 인증 정보를 저장했습니다, uri: {}", authentication.getName(), requestURI);
         } else {
+            SecurityContextHolder.getContext().getAuthentication();
             logger.debug("유효한 JWT 토큰이 없습니다, uri: {}", requestURI);
         }
 

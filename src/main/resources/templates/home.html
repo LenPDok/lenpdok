@@ -6,7 +6,25 @@
   <link rel="stylesheet" type="text/css" href="/css/style.css"> <!-- css 참조-->
   <script language="javascript">
     function showPopup() {window.open("/write_plan", "플래너", "width=400, height=300, left=100, top=50");}
+    function init() {
 
+      fetch("/api/getPlan", {
+        method: 'post',
+        headers: {
+          'content-type': 'application/json',
+          'Authorization': localStorage.getItem('jwt')
+        },
+        body: JSON.stringify({
+          jwt : localStorage.getItem('jwt').split(' ')[1]
+        })
+      }).then(res => res.json())
+              .then(plan => {
+          console.log(plan)
+          document.getElementById('planCnt').innerHTML = Object.keys(plan).length;
+      });
+    }
+
+    init();
   </script>
 
 </head>
@@ -16,12 +34,6 @@
 <div class="wrap">
   <div class="intro_bg">
     <div class="header" id="link_header">
-      <div class="searchArea">
-        <form>
-          <input type="search" placeholder="search">
-          <span>검색</span>
-        </form>
-      </div>
       <ul class="nav">
         <li><a href="#link_header">HOME</a></li>
         <li><a href="#link_main_text0">ABOUT</a></li>
@@ -40,7 +52,7 @@
   <li>
     <div>
       <div class="contents1">오늘 공부해야 할 것</div>
-      <div th:text="${planCnt}" class="result"></div>
+      <div class="result" id="planCnt">로그인 해주세요.</div>
     </div>
   </li>
   <li>

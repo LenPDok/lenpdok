@@ -4,7 +4,6 @@ import com.example.lenpdok.mapper.UserRepository;
 import com.example.lenpdok.model.Authority;
 import com.example.lenpdok.model.User;
 import com.example.lenpdok.model.UserDto;
-import com.example.lenpdok.util.SecurityUtil;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -43,13 +42,14 @@ public class UserService {
         return UserDto.from(userRepository.save(user));
     }
 
-    @Transactional(readOnly = true)
-    public UserDto getUserWithAuthorities(String username) {
-        return UserDto.from(userRepository.findOneWithAuthoritiesByUsername(username).orElse(null));
-    }
+//    @Transactional(readOnly = true)
+//    public UserDto getUserWithAuthorities(String username) {
+//        return UserDto.from(userRepository.findOneWithAuthoritiesByUsername(username).orElse(null));
+//    }
+//
+//    @Transactional(readOnly = true)
+//    public UserDto getMyUserWithAuthorities() {
+//        return UserDto.from(SecurityUtil.getCurrentUsername().flatMap(userRepository::findOneWithAuthoritiesByUsername).orElse(null));
+//    }
 
-    @Transactional(readOnly = true)
-    public UserDto getMyUserWithAuthorities() {
-        return UserDto.from(SecurityUtil.getCurrentUsername().flatMap(userRepository::findOneWithAuthoritiesByUsername).orElse(null));
-    }
 }
