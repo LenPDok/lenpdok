@@ -5,7 +5,7 @@
 <mapper namespace="com.example.lenpdok.mapper.StudyMapper">
     <resultMap id="Plan" type="com.example.lenpdok.model.Plan">
         <result property="id" column="id" />
-        <result property="login_id" column="login_id" />
+        <result property="user_id" column="user_id" />
         <result property="subject" column="subject" />
         <result property="title" column="title" />
         <result property="plan_date" column="plan_date" />
@@ -13,7 +13,7 @@
     </resultMap>
 
     <insert id="addPlan">
-        INSERT INTO plan(login_id, subject, title, plan_date, activate)
+        INSERT INTO plan(username, subject, title, plan_date, activate)
             VALUE (1, "과목", #{title}, sysdate(), 0);
     </insert>
 
@@ -21,7 +21,7 @@
         SELECT
             *
         FROM plan
-        WHERE LOGIN_ID=#{user_id}
+        WHERE USERNAME=#{username}
           AND DATE(plan_date) = date_format(SYSDATE(), '%Y-%m-%d');
     </select>
 </mapper>

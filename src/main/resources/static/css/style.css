@@ -524,3 +524,8 @@ a {
   border: 0;
   resize: vertical;
 }
+
+#username {
+  color: burlywood;
+  font-size: 12px;
+}

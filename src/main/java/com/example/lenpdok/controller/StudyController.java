@@ -23,26 +23,6 @@ public class StudyController {
         return modelAndView;
     }
 
-    @ResponseBody
-    @PostMapping("/save_plan")
-    public String savePlan(HttpServletRequest request) {
-        Plan plan = new Plan();
-        Enumeration e = request.getParameterNames();
-        while ( e.hasMoreElements() ){
-            String name = (String) e.nextElement();
-            String[] values = request.getParameterValues(name);
-            for (String value : values) {
-                if(!value.equals(""))
-                {
-                    plan.setTitle(value);
-                    studyService.addPlan(plan);
-                }
-            }
-        }
-        String resultmsg="<script>alert('저장되었습니다.');self.close();opener.location.reload();</script>";
-        return resultmsg;
-    }
-
     @GetMapping("/community")
     public ModelAndView community() {
         ModelAndView modelAndView = new ModelAndView("/community/list");

@@ -45,6 +45,10 @@
 
   const $loginButton = document.querySelector("#login-form-submit");
   $loginButton.addEventListener("click", login);
+
+  if(localStorage.getItem('jwt')) {
+    localStorage.removeItem('jwt');
+  }
 </script>
 </body>
 
