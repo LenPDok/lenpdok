@@ -8,7 +8,7 @@ import java.util.List;
 
 @Mapper
 public interface StudyMapper {
-    void addPlan(@Param("title") String title);
+    void addPlan(@Param("title") String title, @Param("username") String username);
 
     List<Plan> getPlanList(@Param("username") String username);
 

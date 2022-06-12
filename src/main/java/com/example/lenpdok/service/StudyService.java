@@ -12,8 +12,8 @@ import java.util.List;
 public class StudyService {
     private final StudyMapper studyMapper;
 
-    public void addPlan(Plan plan) {
-        studyMapper.addPlan(plan.getTitle());
+    public void addPlan(Plan plan, String username) {
+        studyMapper.addPlan(plan.getTitle(), username);
     }
 
     public List<Plan> getPlanList(String username) {

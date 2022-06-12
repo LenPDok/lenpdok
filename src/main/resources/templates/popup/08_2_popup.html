@@ -20,18 +20,27 @@ study task<br>
 
 
 <script>
-// 구현 마저할것 TODO
     function save() {
+        let data = {
+            '1' : document.getElementsByName('plan')[0].value,
+            '2' : document.getElementsByName('plan')[1].value,
+            '3' : document.getElementsByName('plan')[2].value,
+            '4' : document.getElementsByName('plan')[3].value,
+            '5' : document.getElementsByName('plan')[4].value,
+        }
         fetch("/api/savePlan", {
             method: 'post',
             headers: {
                 'content-type': 'application/json',
                 'Authorization': localStorage.getItem('jwt')
             },
-            body: document.getElementsByName('plan')
+            body: JSON.stringify(data)
         }).then( res => {
             if(res.status === 401) {
                 alert('권한이 없습니다.');
+            } else {
+                res.text().then(mes => alert(mes));
+                window.close()
             }
         })
     }

@@ -14,7 +14,7 @@
 
     <insert id="addPlan">
         INSERT INTO plan(username, subject, title, plan_date, activate)
-            VALUE (1, "과목", #{title}, sysdate(), 0);
+            VALUE (#{username}, "과목", #{title}, sysdate(), 0);
     </insert>
 
     <select id="getPlanList" resultMap="Plan">
