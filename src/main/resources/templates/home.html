@@ -165,7 +165,7 @@
   function showPopup() {window.open("/write_plan", "플래너", "width=400, height=300, left=100, top=50");}
   function init() {
     fetch("/api/getPlan", {
-      method: 'post',
+      method: 'get',
       headers: {
         'content-type': 'application/json',
         'Authorization': localStorage.getItem('jwt')
@@ -182,7 +182,7 @@
             });
 
     fetch("/api/currentUsername", {
-      method: 'post',
+      method: 'get',
       headers: {
         'content-type': 'application/json',
         'Authorization': localStorage.getItem('jwt')

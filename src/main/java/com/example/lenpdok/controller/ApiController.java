@@ -4,6 +4,7 @@ import com.example.lenpdok.jwt.JwtFilter;
 import com.example.lenpdok.jwt.TokenProvider;
 import com.example.lenpdok.mapper.UserRepository;
 import com.example.lenpdok.model.*;
+import com.example.lenpdok.service.CommunityService;
 import com.example.lenpdok.service.StudyService;
 import com.example.lenpdok.util.SecurityUtil;
 import lombok.RequiredArgsConstructor;
@@ -28,6 +29,7 @@ public class ApiController {
     private final AuthenticationManagerBuilder authenticationManagerBuilder;
     private final StudyService studyService;
     private final UserRepository userRepository;
+    private final CommunityService communityService;
 
     private SecurityUtil securityUtil;
 
@@ -49,7 +51,7 @@ public class ApiController {
     }
 
     @ResponseBody
-    @PostMapping("/getPlan")
+    @GetMapping("/getPlan")
     public List<Plan> getPlanList() {
         String username = UserDto.from(securityUtil.getCurrentUsername().flatMap(userRepository::findOneWithAuthoritiesByUsername).orElse(null)).getUsername();
         List<Plan> planList = studyService.getPlanList(username);
@@ -57,7 +59,7 @@ public class ApiController {
     }
 
     @ResponseBody
-    @PostMapping("/currentUsername")
+    @GetMapping("/currentUsername")
     public String currentUsername() {
         String username = UserDto.from(securityUtil.getCurrentUsername().flatMap(userRepository::findOneWithAuthoritiesByUsername).orElse(null)).getUsername();
         System.out.println("현재 접속 계정명 : " + username);
@@ -78,5 +80,29 @@ public class ApiController {
         }
         String resultmsg="저장되었습니다.";
         return resultmsg;
+    }
+
+    @GetMapping("/getCommunity")
+    public List<Community> getCommunity() {
+        String username = UserDto.from(securityUtil.getCurrentUsername().flatMap(userRepository::findOneWithAuthoritiesByUsername).orElse(null)).getUsername();
+        List<Community> communityList = communityService.getCommunityList();
+        return communityList;
+    }
+
+    @PostMapping("/writeCommunity")
+    public void writeCommunity(@RequestBody Community community) {
+        String username = UserDto.from(securityUtil.getCurrentUsername().flatMap(userRepository::findOneWithAuthoritiesByUsername).orElse(null)).getUsername();
+        communityService.writeCommunity(community);
+    }
+
+    @PutMapping("/updateCommunity")
+    public void updateCommunity(@RequestBody Community community) {
+        String username = UserDto.from(securityUtil.getCurrentUsername().flatMap(userRepository::findOneWithAuthoritiesByUsername).orElse(null)).getUsername();
+        communityService.updateCommunity(community);
+    }
+
+    @DeleteMapping("/deleteCommunity")
+    public void deleteCommunity(String id) {
+        communityService.deleteCommunity(Integer.parseInt(id));
     }
 }

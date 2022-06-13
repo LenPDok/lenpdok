@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.example.lenpdok.mapper.CommunityMapper">
+    <resultMap id="Community" type="com.example.lenpdok.model.Community">
+        <result property="id" column="id" />
+        <result property="title" column="title" />
+        <result property="username" column="username" />
+        <result property="title" column="title" />
+        <result property="content" column="content" />
+        <result property="write_date" column="write_date" />
+    </resultMap>
+
+    <select id="getCommunityList" resultMap="Community">
+        SELECT
+            *
+        FROM community
+    </select>
+
+    <insert id="writeCommunity">
+        INSERT INTO COMMUNITY( CONTENT, WRITE_DATE, TITLE, USERNAME) values(#{community.content}, sysdate(), #{community.title}, #{community.username})
+    </insert>
+
+    <update id="updateCommunity">
+        UPDATE COMMUNITY SET CONTENT = #{community.content}, TITLE = #{community.title}, USERNAME = #{community.username} where id = #{community.id}
+    </update>
+
+    <delete id="deleteCommunity">
+        DELETE COMMUNITY where id = #{id}
+    </delete>
+</mapper>
