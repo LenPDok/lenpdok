@@ -94,7 +94,7 @@
       <div class="contents2">
         다른 사람들과 정보를 공유해 보아요
       </div>
-      <div class ="more" onClick="location.href='/community'">
+      <div class ="more" onClick="location.href='/community/board'">
         MORE
       </div>
     </li>
@@ -169,10 +169,7 @@
       headers: {
         'content-type': 'application/json',
         'Authorization': localStorage.getItem('jwt')
-      },
-      body: JSON.stringify({
-        jwt : localStorage.getItem('jwt').split(' ')[1]
-      })
+      }
     }).then(res => res.json())
             .then(plan => {
               console.log(plan)
@@ -186,10 +183,7 @@
       headers: {
         'content-type': 'application/json',
         'Authorization': localStorage.getItem('jwt')
-      },
-      body: JSON.stringify({
-        jwt : localStorage.getItem('jwt').split(' ')[1]
-      })
+      }
     }).then(res => {
       if(res.status !== 401) {
         res.text().then(function(username) {

@@ -22,10 +22,4 @@ public class StudyController {
         ModelAndView modelAndView = new ModelAndView("/popup/08_2_popup");
         return modelAndView;
     }
-
-    @GetMapping("/community")
-    public ModelAndView community() {
-        ModelAndView modelAndView = new ModelAndView("/community/list");
-        return modelAndView;
-    }
 }

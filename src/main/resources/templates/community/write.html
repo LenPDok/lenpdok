@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>공지사항</title>
-    <link rel="stylesheet" href="css/css.css">
+    <link rel="stylesheet" href="/css/css.css">
 </head>
 <body>
     <div class="board_wrap">
@@ -17,28 +17,59 @@
                 <div class="title">
                     <dl>
                         <dt>제목</dt>
-                        <dd><input type="text" placeholder="제목 입력"></dd>
-                    </dl>
-                </div>
-                <div class="info">
-                    <dl>
-                        <dt>글쓴이</dt>
-                        <dd><input type="text" placeholder="글쓴이 입력"></dd>
-                    </dl>
-                    <dl>
-                        <dt>비밀번호</dt>
-                        <dd><input type="password" placeholder="비밀번호 입력"></dd>
+                        <dd><input type="text" placeholder="제목 입력" id="title"></dd>
                     </dl>
                 </div>
                 <div class="cont">
-                    <textarea placeholder="내용 입력"></textarea>
+                    <textarea placeholder="내용 입력" id="content"></textarea>
                 </div>
             </div>
             <div class="bt_wrap">
-                <a href="view.html" class="on">등록</a>
-                <a href="list.html">취소</a>
+                <button class="on">등록</button>
+                <a href="/community/board">취소</a>
             </div>
         </div>
     </div>
+    <script>
+        const $btn = document.querySelector('.on');
+        const $title = document.getElementById('title');
+        const $content = document.getElementById('content');
+
+        function write() {
+            let titleValue = $title.value;
+            let contentValue = $content.value;
+            let data = {};
+            fetch("/api/currentUsername", {
+                method: 'get',
+                headers: {
+                    'content-type': 'application/json',
+                    'Authorization': localStorage.getItem('jwt')
+                }
+            }).then(res => {
+                if(res.status !== 401) {
+                    res.text().then(function(name) {
+                        data = {
+                            title : titleValue,
+                            username : name,
+                            content : contentValue
+                        }
+                        fetch("/api/writeCommunity", {
+                            method: 'post',
+                            headers: {
+                                'content-type': 'application/json',
+                                'Authorization': localStorage.getItem('jwt')
+                            },
+                            body: JSON.stringify(data)
+                        }).then(res => res.text().then((msg) => {
+                            alert(msg);
+                            location.href='/community/board';
+                        }))
+                    })
+                }
+            });
+        }
+
+        $btn.addEventListener('click', write);
+    </script>
 </body>
 </html>

@@ -3,19 +3,26 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.example.lenpdok.mapper.CommunityMapper">
-    <resultMap id="Community" type="com.example.lenpdok.model.Community">
+    <resultMap id="Community" type="com.example.lenpdok.model.CommunityDto">
         <result property="id" column="id" />
         <result property="title" column="title" />
         <result property="username" column="username" />
-        <result property="title" column="title" />
         <result property="content" column="content" />
         <result property="write_date" column="write_date" />
     </resultMap>
 
     <select id="getCommunityList" resultMap="Community">
         SELECT
-            *
+            id, title, username, content, DATE_FORMAT(community.write_date, '%Y-%m-%d') AS write_date
         FROM community
+        order by write_date;
+    </select>
+
+    <select id="getCommunity" resultType="com.example.lenpdok.model.CommunityDto">
+        SELECT
+            id, title, username, content, DATE_FORMAT(community.write_date, '%Y-%m-%d') AS write_date
+        FROM community
+        where id=#{id};
     </select>
 
     <insert id="writeCommunity">
@@ -27,6 +34,6 @@
     </update>
 
     <delete id="deleteCommunity">
-        DELETE COMMUNITY where id = #{id}
+        DELETE FROM COMMUNITY where id = #{id}
     </delete>
 </mapper>

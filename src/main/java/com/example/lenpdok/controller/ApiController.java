@@ -83,26 +83,51 @@ public class ApiController {
     }
 
     @GetMapping("/getCommunity")
-    public List<Community> getCommunity() {
-        String username = UserDto.from(securityUtil.getCurrentUsername().flatMap(userRepository::findOneWithAuthoritiesByUsername).orElse(null)).getUsername();
-        List<Community> communityList = communityService.getCommunityList();
+    public List<CommunityDto> getCommunityList() {
+        List<CommunityDto> communityList = communityService.getCommunityList();
         return communityList;
     }
 
+    @GetMapping("/getCommunity/{id}")
+    public CommunityDto getCommunity(@PathVariable Integer id) {
+        System.out.println(id);
+        CommunityDto community = communityService.getCommunity(id);
+        return community;
+    }
+
     @PostMapping("/writeCommunity")
-    public void writeCommunity(@RequestBody Community community) {
-        String username = UserDto.from(securityUtil.getCurrentUsername().flatMap(userRepository::findOneWithAuthoritiesByUsername).orElse(null)).getUsername();
+    public String writeCommunity(@RequestBody CommunityDto community) {
+        community.setUsername(UserDto.from(securityUtil.getCurrentUsername().flatMap(userRepository::findOneWithAuthoritiesByUsername).orElse(null)).getUsername());
+        System.out.println(community);
         communityService.writeCommunity(community);
+        return "저장되었습니다.";
     }
 
     @PutMapping("/updateCommunity")
-    public void updateCommunity(@RequestBody Community community) {
-        String username = UserDto.from(securityUtil.getCurrentUsername().flatMap(userRepository::findOneWithAuthoritiesByUsername).orElse(null)).getUsername();
-        communityService.updateCommunity(community);
+    public String updateCommunity(@RequestBody CommunityDto community) {
+        String currentUser = UserDto.from(securityUtil.getCurrentUsername().flatMap(userRepository::findOneWithAuthoritiesByUsername).orElse(null)).getUsername();
+        String communityUser = communityService.getCommunity(community.getId()).getUsername();
+        if(currentUser.equals(communityUser)) {
+            community.setUsername(currentUser);
+            communityService.updateCommunity(community);
+            return "수정되었습니다.";
+        } else {
+            return "권한이 없습니다.";
+        }
+
     }
 
-    @DeleteMapping("/deleteCommunity")
-    public void deleteCommunity(String id) {
-        communityService.deleteCommunity(Integer.parseInt(id));
+    @DeleteMapping("/deleteCommunity/{id}")
+    public String deleteCommunity(@PathVariable Integer id) {
+        String currentUser = UserDto.from(securityUtil.getCurrentUsername().flatMap(userRepository::findOneWithAuthoritiesByUsername).orElse(null)).getUsername();
+        String communityUser = communityService.getCommunity(id).getUsername();
+        if(currentUser.equals(communityUser)) {
+            communityService.deleteCommunity(id);
+            return "삭제되었습니다.";
+        } else {
+            return "권한이 없습니다.";
+        }
+
+
     }
 }

@@ -10,6 +10,10 @@
   color: #000;
 }
 
+button {
+  cursor:pointer;
+}
+
 h1 {  
   font-size: 48px;
   font-weight: 100;
@@ -290,6 +294,21 @@ a {
   border: 1px solid #000;
   border-radius: 2px;
   font-size: 1.4rem;
+}
+
+.bt_wrap button {
+  display: inline-block;
+  min-width: 80px;
+  margin-left: 10px;
+  padding: 10px;
+  border: 1px solid #000;
+  border-radius: 2px;
+  font-size: 1.4rem;
+}
+
+.bt_wrap button.on {
+  background: #000;
+  color: #fff;
 }
 
 .bt_wrap a:first-child {

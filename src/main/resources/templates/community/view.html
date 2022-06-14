@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>공지사항</title>
-    <link rel="stylesheet" href="css/css.css">
+    <link rel="stylesheet" href="/css/css.css">
 </head>
 <body>
     <div class="board_wrap">
@@ -14,43 +14,85 @@
         </div>
         <div class="board_view_wrap">
             <div class="board_view">
-                <div class="title">
+                <div class="title" id="title">
                     글 제목이 들어갑니다.
                 </div>
                 <div class="info">
                     <dl>
-                        <dt>번호</dt>
-                        <dd>1</dd>
+                        <dt>글번호</dt>
+                        <dd id="id"></dd>
                     </dl>
                     <dl>
                         <dt>글쓴이</dt>
-                        <dd>김이름</dd>
+                        <dd id="username"></dd>
                     </dl>
                     <dl>
                         <dt>작성일</dt>
-                        <dd>2021.1.16</dd>
-                    </dl>
-                    <dl>
-                        <dt>조회</dt>
-                        <dd>33</dd>
+                        <dd id="write_date"></dd>
                     </dl>
                 </div>
-                <div class="cont">
-                    글 내용이 들어갑니다<br>
-                    글 내용이 들어갑니다<br>
-                    글 내용이 들어갑니다<br>
-                    글 내용이 들어갑니다<br>
-                    글 내용이 들어갑니다<br>
-                    글 내용이 들어갑니다<br>
-                    글 내용이 들어갑니다<br>
-                    글 내용이 들어갑니다
+                <div class="cont" id="content">
                 </div>
             </div>
             <div class="bt_wrap">
-                <a href="list.html" class="on">목록</a>
-                <a href="edit.html">수정</a>
+                <a href="/community/board" class="on">목록</a>
             </div>
         </div>
     </div>
+    <script>
+        let id = window.location.href.split('community/')[1];
+        let username = '';
+        fetch("/api/getCommunity/" + id, {
+            method: 'get',
+            headers: {
+                'content-type': 'application/json',
+                'Authorization': localStorage.getItem('jwt')
+            }
+        }).then(res => res.json())
+            .then(community => {
+                console.log(community)
+                if(community.status !== 401) {
+                    document.getElementById('id').innerText = community.id;
+                    document.getElementById('username').innerText = community.username;
+                    document.getElementById('title').innerText = community.title;
+                    document.getElementById('write_date').innerText = community.write_date;
+                    document.getElementById('content').innerText = community.content;
+                } else {
+                    $contents.innerHTML = '<div><div>로그인해주세요.</div></div>'
+                }
+            });
+
+        fetch("/api/currentUsername", {
+            method: 'get',
+            headers: {
+                'content-type': 'application/json',
+                'Authorization': localStorage.getItem('jwt')
+            }
+        }).then(res => {
+            if(res.status !== 401) {
+                res.text().then(function(name) {
+                    username = name;
+                    if(username === document.getElementById('username').innerText) {
+                        document.querySelector('.bt_wrap').innerHTML += `<a href="/community/edit/${id}">수정</a><button type="button" id="delete">삭제</button>`;
+                        const $btn = document.getElementById('delete');
+                        $btn.addEventListener('click', () => {
+                            if(confirm('삭제하시겠습니까?')) {
+                                fetch("/api/deleteCommunity/" + id, {
+                                    method: 'delete',
+                                    headers: {
+                                        'content-type': 'application/json',
+                                        'Authorization': localStorage.getItem('jwt')
+                                    }
+                                }).then(res => res.text().then(function(msg) {
+                                    alert(msg);
+                                    location.href='/community/board';
+                                }))
+                            }
+                        })
+                    }
+                })
+            }
+        });
+    </script>
 </body>
 </html>
