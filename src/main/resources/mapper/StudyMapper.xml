@@ -11,6 +11,13 @@
         <result property="activate" column="activate" />
     </resultMap>
 
+    <resultMap id="StudyTime" type="com.example.lenpdok.model.StudyTimeDto">
+        <result property="id" column="id" />
+        <result property="username" column="username" />
+        <result property="time" column="time" />
+        <result property="date" column="date" />
+    </resultMap>
+
     <select id="getPlan" resultType="com.example.lenpdok.model.Plan">
         SELECT
             *
@@ -38,4 +45,21 @@
     <delete id="deletePlan">
         DELETE FROM plan where id =#{id};
     </delete>
+
+    <select id="getStudyTime" resultType="com.example.lenpdok.model.StudyTimeDto">
+        SELECT
+            id, DATE_FORMAT(study_time.date, '%Y-%m-%d') AS date, time, username
+        FROM study_time
+        WHERE USERNAME = #{username}
+          and date = #{date}
+    </select>
+
+    <select id="getStudyTimeList" resultMap="StudyTime">
+        SELECT
+            id, DATE_FORMAT(study_time.date, '%Y-%m-%d') AS date, time, username
+        FROM study_time
+        WHERE USERNAME = #{username}
+            and date between #{monday} and #{sunday}
+        order by date;
+    </select>
 </mapper>

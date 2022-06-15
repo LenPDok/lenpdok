@@ -68,7 +68,7 @@ public class ApiController {
     }
 
     @ResponseBody
-    @GetMapping("/getPlan/{}")
+    @GetMapping("/getPlan/{id}")
     public Plan getPlan(@PathVariable Integer id) {
         String username = UserDto.from(securityUtil.getCurrentUsername().flatMap(userRepository::findOneWithAuthoritiesByUsername).orElse(null)).getUsername();
         Plan plan = studyService.getPlan(id);
@@ -167,7 +167,21 @@ public class ApiController {
         } else {
             return "권한이 없습니다.";
         }
+    }
 
+    @GetMapping("/getStudyTime")
+    public List<StudyTimeDto> getStudyTimeList() {
+        String currentUser = UserDto.from(securityUtil.getCurrentUsername().flatMap(userRepository::findOneWithAuthoritiesByUsername).orElse(null)).getUsername();
+        System.out.println("*********getStudyTimeList***********");
+        List<StudyTimeDto> studyTimes = studyService.getStudyTimeList(currentUser);
+        return studyTimes;
+    }
 
+    @GetMapping("/getStudyTime/{date}")
+    public StudyTimeDto getStudyTime(@PathVariable String date) {
+        String currentUser = UserDto.from(securityUtil.getCurrentUsername().flatMap(userRepository::findOneWithAuthoritiesByUsername).orElse(null)).getUsername();
+        System.out.println("*********getStudyTime***********");
+        StudyTimeDto studyTime = studyService.getStudyTime(currentUser, date);
+        return studyTime;
     }
 }

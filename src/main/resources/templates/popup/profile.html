@@ -1,0 +1,51 @@
+<html>
+<head>
+ <title> 프로필 </title>
+  <link rel="stylesheet" href="/css/profile.css">
+</head>
+
+<body onload="window.resizeTo(800, 600)">
+
+<div style="text-align: center;">
+  <h1> 프로필 </h1>
+</div>
+    <p><span style="border-left: 12px solid #dcf1fb; padding: 0 0 0  0.2em;">
+       <f>주간 학습량</f>  </span>
+    </p>
+   <div>
+    <div style="padding-bottom: 10px;">
+        <g>총 공부량</g>
+        <g id="total"></g>
+    </div>
+    <div> 
+        <g>평균 공부량</g>
+        <g id="average"></g>
+    </div> 
+   </div>
+
+   <p><span style="border-left: 12px solid #dcf1fb; padding: 0 0 0  0.2em;">
+    <f>요일별 공부시간</f>  </span>
+ </p>
+ 
+ <br>
+
+  <div class="vertical_chart_box">
+    <div class="chart_box">
+      <ul class="axis_y">
+        <li class="item">0<span class="blind">시간</span></li>
+        <li class="item">3<span class="blind">시간</span></li>
+        <li class="item">6<span class="blind">시간</span></li>
+        <li class="item">9<span class="blind">시간</span></li>
+        <li class="item">12<span class="blind">시간</span></li>
+      </ul>
+      <ul class="axis_x">
+
+      </ul>
+    </div>                                                 
+  </div>
+<br><br>
+
+<script src="/script/popup/profile.js"></script>
+</body>
+
+</html>

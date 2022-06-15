@@ -10,6 +10,10 @@ import java.util.Date;
 @Data
 public class StudyTime {
     @Id
+    @Column(name = "id")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private int id;
+
     @Column(name = "username", length = 50)
     private String username;
 

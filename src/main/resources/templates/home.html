@@ -34,19 +34,15 @@
   <li>
     <div>
       <div class="contents1">순 공부 시간</div>
-      <div class="result">10h</div>
+      <div class="result" id="studyTime">공부기록이 없습니다.</div>
     </div>
   </li>
   <li>
     <div>
-      <div class="contents1">시작 시간</div>
-      <div class="result">08:30</div>
-    </div>
-  </li>
-  <li>
-    <div>
-      <div class="contents1">종료 시간</div>
-      <div class="result">18:30 </div>
+      <div class="contents1">공부 시작</div>
+      <div class="more">
+        공부하기
+      </div>
     </div>
   </li>
 </ul>
@@ -136,56 +132,6 @@
   </div>
 </div>
 </div>
-<script>
-  const $login = document.getElementById('login');
-  let length = 0;
-  function showPopup() {window.open("/write_plan", "플래너", "width=400, height=300, left=100, top=50");}
-  function showProfile() {window.open("/profile", "플래너", "width=800, height=600, left=100, top=50");}
-  function init() {
-    fetch("/api/getPlan", {
-      method: 'get',
-      headers: {
-        'content-type': 'application/json',
-        'Authorization': localStorage.getItem('jwt')
-      }
-    }).then(res => res.json())
-            .then(plan => {
-              console.log(plan)
-              if(plan.status !== 401) {
-                for(let i=0; i<Object(plan).length; i++) {
-                  if(!plan[i].activate) {
-                     length ++;
-                  }
-                }
-                document.getElementById('planCnt').innerHTML = length;
-              }
-            });
-
-    fetch("/api/currentUsername", {
-      method: 'get',
-      headers: {
-        'content-type': 'application/json',
-        'Authorization': localStorage.getItem('jwt')
-      }
-    }).then(res => {
-      if(res.status !== 401) {
-        res.text().then(function(username) {
-          document.getElementById('username').innerHTML = '환영합니다.    '+ username +'님    <button id="logout">logout</button>';
-          const $logout = document.getElementById('logout');
-          $logout.addEventListener('click', () => {
-            localStorage.removeItem('jwt');
-            location.href = '/login';
-          });
-        })
-      }
-    });
-  }
-
-  $login.addEventListener('click', () => {
-    location.href = '/login';
-  })
-
-  init();
-</script>
+<script src="/script/home.js"></script>
 </body>
 </html>
