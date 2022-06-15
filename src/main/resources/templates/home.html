@@ -65,11 +65,8 @@
       <div class="contents2">
         하루 공부 계획을 세워보세요.
       </div>
-      <div class="more" input type="button" value="계획하기" onclick="showPopup();">
-
-        <!-- MORE -->
+      <div class="more" onclick="showPopup()">
         계획하기
-        <!-- <input type="button" value="계획하기" onclick="showPopup();"> -->
       </div>
     </li>
 
@@ -81,8 +78,8 @@
       <div class="contents2">
         공부량을 확인해보아요.
       </div>
-      <div class="more">
-        MORE
+      <div class="more" onclick="showProfile();">
+        프로필
       </div>
     </li>
 
@@ -110,30 +107,6 @@
     </div>
     <div class="contents2">
 
-      <!-- 총알오징어는, 사실 어떤 특정한 품종을 가진 게 아니랍니다. <br>
-      우리가 사먹지 말아야 한다는 것이죠. <br>
-      불과 약 5년전만 해도 시장에 가면 냉동오징어 한마리에 천원이면 샀는데, <br>
-      이젠 두마리에 7~8천원씩 하니, 더이상 서민음식이 아니게 된거죠. <br><br>
-
-      얼마전에는 가격을 비교해 보았더니 마른오징어를 기준으로 <br>
-      같은 그람수에 같은 가격이 나올 정도로 천정부지로 오징어값이 치솟았답니다. <br>
-      그런 오징어, 못생겼다고 놀리지 말고 <br>
-      이제 소중하게 대해주어야 하지 않을까요?<br> -->
-
-      <!-- <h2>이것이 오징어야, 문어야?</h2>
-      이것이 오징어인지 문어인지 헷갈리시는 분들도 있을거에요. <br>
-      왜냐면 이것은 그냥 Pixabay에서 오징어라고 검색했더니 나온 이미지인데 <br>
-      오징어 같은 아무것이나 검색이 된것 같아요. <br><br>
-
-      총알오징어는, 사실 어떤 특정한 품종을 가진 게 아니랍니다. <br>
-      우리가 사먹지 말아야 한다는 것이죠. <br>
-      불과 약 5년전만 해도 시장에 가면 냉동오징어 한마리에 천원이면 샀는데, <br>
-      이젠 두마리에 7~8천원씩 하니, 더이상 서민음식이 아니게 된거죠. <br><br>
-
-      얼마전에는 가격을 비교해 보았더니 마른오징어를 기준으로 <br>
-      같은 그람수에 같은 가격이 나올 정도로 천정부지로 오징어값이 치솟았답니다. <br>
-      그런 오징어, 못생겼다고 놀리지 말고 <br>
-      이제 소중하게 대해주어야 하지 않을까요?<br> -->
     </div>
   </div>
 </div>
@@ -142,8 +115,12 @@
   <ul>
     <li>
       <div><h1>CONTACT</h1></div>
-      <!-- <div>우리에게 파트너십을 신청하거나, 고객이 되어주세요</div> -->
-      <div class="more2">더 알아보기</div>
+      <div class="more2">
+        캡스톤 디자인 6조 <br>
+        고득준 김민석 이선민 박나연 <br>
+        <!-- 02 - 223 -2912~5 <br> -->
+        <!-- COPYRIGHT 2019. TAMO. ALL RIGHT RESERVED. -->
+      </div>
     </li>
     <li></li>
   </ul>
@@ -161,8 +138,9 @@
 </div>
 <script>
   const $login = document.getElementById('login');
-
+  let length = 0;
   function showPopup() {window.open("/write_plan", "플래너", "width=400, height=300, left=100, top=50");}
+  function showProfile() {window.open("/profile", "플래너", "width=800, height=600, left=100, top=50");}
   function init() {
     fetch("/api/getPlan", {
       method: 'get',
@@ -174,7 +152,12 @@
             .then(plan => {
               console.log(plan)
               if(plan.status !== 401) {
-                document.getElementById('planCnt').innerHTML = Object.keys(plan).length;
+                for(let i=0; i<Object(plan).length; i++) {
+                  if(!plan[i].activate) {
+                     length ++;
+                  }
+                }
+                document.getElementById('planCnt').innerHTML = length;
               }
             });
 

@@ -51,14 +51,6 @@ public class ApiController {
     }
 
     @ResponseBody
-    @GetMapping("/getPlan")
-    public List<Plan> getPlanList() {
-        String username = UserDto.from(securityUtil.getCurrentUsername().flatMap(userRepository::findOneWithAuthoritiesByUsername).orElse(null)).getUsername();
-        List<Plan> planList = studyService.getPlanList(username);
-        return planList;
-    }
-
-    @ResponseBody
     @GetMapping("/currentUsername")
     public String currentUsername() {
         String username = UserDto.from(securityUtil.getCurrentUsername().flatMap(userRepository::findOneWithAuthoritiesByUsername).orElse(null)).getUsername();
@@ -66,31 +58,78 @@ public class ApiController {
         return username;
     }
 
+    @ResponseBody
+    @GetMapping("/getPlan")
+    public List<Plan> getPlanList() {
+        String username = UserDto.from(securityUtil.getCurrentUsername().flatMap(userRepository::findOneWithAuthoritiesByUsername).orElse(null)).getUsername();
+        List<Plan> planList = studyService.getPlanList(username);
+        System.out.println("*********getPlanList***********:" + planList);
+        return planList;
+    }
+
+    @ResponseBody
+    @GetMapping("/getPlan/{}")
+    public Plan getPlan(@PathVariable Integer id) {
+        String username = UserDto.from(securityUtil.getCurrentUsername().flatMap(userRepository::findOneWithAuthoritiesByUsername).orElse(null)).getUsername();
+        Plan plan = studyService.getPlan(id);
+        System.out.println("*********getPlan***********:" + plan);
+        return plan;
+    }
+
+
     @PostMapping("/savePlan")
-    public String savePlan(@RequestBody HashMap<String, String> data) {
+    public String savePlan(@RequestBody String data) {
         String username = UserDto.from(securityUtil.getCurrentUsername().flatMap(userRepository::findOneWithAuthoritiesByUsername).orElse(null)).getUsername();
         System.out.println("*********savePlan***********");
         System.out.println(data);
         Plan plan = new Plan();
-        for(int i=1; i<data.size()+1; i++) {
-            if(data.get(Integer.toString(i)) != null && data.get(Integer.toString(i)) != "") {
-                plan.setTitle(data.get(Integer.toString(i)));
-                studyService.addPlan(plan, username);
-            }
-        }
+        plan.setUsername(username);
+        plan.setActivate(false);
+        plan.setTitle(data);
+        studyService.addPlan(plan);
         String resultmsg="저장되었습니다.";
         return resultmsg;
+    }
+
+    @PutMapping("/checkPlan/{id}")
+    public String checkPlan(@PathVariable Integer id) {
+        System.out.println(id);
+        String currentUser = UserDto.from(securityUtil.getCurrentUsername().flatMap(userRepository::findOneWithAuthoritiesByUsername).orElse(null)).getUsername();
+        String planUser = studyService.getPlan(id).getUsername();
+        if(currentUser.equals(planUser)) {
+            System.out.println("*********checkPlan***********");
+            studyService.checkPlan(id);
+            return "";
+        } else {
+            return "권한이 없습니다";
+        }
+    }
+
+    @DeleteMapping("/deletePlan/{id}")
+    public String deletePlan(@PathVariable Integer id) {
+        System.out.println(id);
+        String currentUser = UserDto.from(securityUtil.getCurrentUsername().flatMap(userRepository::findOneWithAuthoritiesByUsername).orElse(null)).getUsername();
+        String planUser = studyService.getPlan(id).getUsername();
+        if(currentUser.equals(planUser)) {
+            System.out.println("*********deletePlan***********");
+            studyService.deletePlan(id);
+            return "삭제되었습니다.";
+        } else {
+            return "권한이 없습니다";
+        }
     }
 
     @GetMapping("/getCommunity")
     public List<CommunityDto> getCommunityList() {
         List<CommunityDto> communityList = communityService.getCommunityList();
+        System.out.println("*********getCommunityList***********");
         return communityList;
     }
 
     @GetMapping("/getCommunity/{id}")
     public CommunityDto getCommunity(@PathVariable Integer id) {
         System.out.println(id);
+        System.out.println("*********getCommunity " + id + "***********");
         CommunityDto community = communityService.getCommunity(id);
         return community;
     }
@@ -98,7 +137,7 @@ public class ApiController {
     @PostMapping("/writeCommunity")
     public String writeCommunity(@RequestBody CommunityDto community) {
         community.setUsername(UserDto.from(securityUtil.getCurrentUsername().flatMap(userRepository::findOneWithAuthoritiesByUsername).orElse(null)).getUsername());
-        System.out.println(community);
+        System.out.println("*********writeCommunity***********");
         communityService.writeCommunity(community);
         return "저장되었습니다.";
     }
@@ -107,6 +146,7 @@ public class ApiController {
     public String updateCommunity(@RequestBody CommunityDto community) {
         String currentUser = UserDto.from(securityUtil.getCurrentUsername().flatMap(userRepository::findOneWithAuthoritiesByUsername).orElse(null)).getUsername();
         String communityUser = communityService.getCommunity(community.getId()).getUsername();
+        System.out.println("*********updateCommunity***********");
         if(currentUser.equals(communityUser)) {
             community.setUsername(currentUser);
             communityService.updateCommunity(community);
@@ -114,13 +154,13 @@ public class ApiController {
         } else {
             return "권한이 없습니다.";
         }
-
     }
 
     @DeleteMapping("/deleteCommunity/{id}")
     public String deleteCommunity(@PathVariable Integer id) {
         String currentUser = UserDto.from(securityUtil.getCurrentUsername().flatMap(userRepository::findOneWithAuthoritiesByUsername).orElse(null)).getUsername();
         String communityUser = communityService.getCommunity(id).getUsername();
+        System.out.println("*********deleteCommunity***********");
         if(currentUser.equals(communityUser)) {
             communityService.deleteCommunity(id);
             return "삭제되었습니다.";

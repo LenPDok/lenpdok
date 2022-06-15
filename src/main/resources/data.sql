@@ -12,9 +12,9 @@ INSERT INTO STUDY_TIME (USERNAME, TIME, DATE) values ('admin', 7200 ,sysdate());
 INSERT INTO STUDY_TIME (USERNAME, TIME, DATE) values ('user', 7200 ,sysdate());
 
 
-INSERT INTO PLAN(ACTIVATE, PLAN_DATE, SUBJECT, TITLE, USERNAME) values (0, sysdate(), '과목', '알고리즘공부', 'admin');
-INSERT INTO PLAN(ACTIVATE, PLAN_DATE, SUBJECT, TITLE, USERNAME) values (0, sysdate(), '과목', 'java언어공부', 'admin');
-INSERT INTO PLAN(ACTIVATE, PLAN_DATE, SUBJECT, TITLE, USERNAME) values (0, sysdate(), '과목', 'spring 프레임워크 공부', 'admin');
+INSERT INTO PLAN(ACTIVATE, PLAN_DATE, TITLE, USERNAME) values (0, sysdate(), '알고리즘공부', 'user');
+INSERT INTO PLAN(ACTIVATE, PLAN_DATE, TITLE, USERNAME) values (0, sysdate(), 'java언어공부', 'user');
+INSERT INTO PLAN(ACTIVATE, PLAN_DATE, TITLE, USERNAME) values (0, sysdate(), 'spring 프레임워크 공부', 'user');
 
 INSERT INTO COMMUNITY( CONTENT, WRITE_DATE, TITLE, USERNAME) values('내용부분 test', sysdate(), 'admin의 글입니다.', 'admin');
 INSERT INTO COMMUNITY( CONTENT, WRITE_DATE, TITLE, USERNAME) values('내용부분 test', sysdate(), 'user의 글입니다.', 'user');

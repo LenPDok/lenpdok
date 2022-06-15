@@ -169,6 +169,7 @@ h1 {
   font-size: 12px;
   line-height: 30px;
   margin:25px auto;
+  cursor: pointer;
 }
 
 /* main_text1*/

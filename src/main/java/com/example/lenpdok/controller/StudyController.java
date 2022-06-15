@@ -19,7 +19,13 @@ public class StudyController {
 
     @GetMapping("/write_plan")
     public ModelAndView plan() {
-        ModelAndView modelAndView = new ModelAndView("/popup/08_2_popup");
+        ModelAndView modelAndView = new ModelAndView("/popup/addPlanerPopup");
+        return modelAndView;
+    }
+
+    @GetMapping("/profile")
+    public ModelAndView profile() {
+        ModelAndView modelAndView = new ModelAndView("/popup/profile");
         return modelAndView;
     }
 }

@@ -17,9 +17,6 @@ public class Plan {
     @Column(name = "username", length = 50)
     private String username;
 
-    @Column(name = "subject", length = 50)
-    private String subject;
-
     @Column(name = "title", length = 50)
     private String title;
 

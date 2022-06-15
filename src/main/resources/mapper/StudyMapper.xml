@@ -6,16 +6,17 @@
     <resultMap id="Plan" type="com.example.lenpdok.model.Plan">
         <result property="id" column="id" />
         <result property="user_id" column="user_id" />
-        <result property="subject" column="subject" />
         <result property="title" column="title" />
         <result property="plan_date" column="plan_date" />
         <result property="activate" column="activate" />
     </resultMap>
 
-    <insert id="addPlan">
-        INSERT INTO plan(username, subject, title, plan_date, activate)
-            VALUE (#{username}, "과목", #{title}, sysdate(), 0);
-    </insert>
+    <select id="getPlan" resultType="com.example.lenpdok.model.Plan">
+        SELECT
+            *
+        FROM plan
+        WHERE ID = #{id};
+    </select>
 
     <select id="getPlanList" resultMap="Plan">
         SELECT
@@ -24,4 +25,17 @@
         WHERE USERNAME=#{username}
           AND DATE(plan_date) = date_format(SYSDATE(), '%Y-%m-%d');
     </select>
+
+    <insert id="addPlan">
+        INSERT INTO plan(username, title, plan_date, activate)
+            VALUE (#{username}, #{title}, sysdate(), 0);
+    </insert>
+
+    <update id="checkPlan">
+       UPDATE plan SET activate = #{activate} where id=#{id};
+    </update>
+
+    <delete id="deletePlan">
+        DELETE FROM plan where id =#{id};
+    </delete>
 </mapper>

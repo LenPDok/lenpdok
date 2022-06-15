@@ -12,15 +12,29 @@ import java.util.List;
 public class StudyService {
     private final StudyMapper studyMapper;
 
-    public void addPlan(Plan plan, String username) {
-        studyMapper.addPlan(plan.getTitle(), username);
+    public void addPlan(Plan plan) {
+        studyMapper.addPlan(plan);
+    }
+
+    public Plan getPlan(Integer id) {
+        return studyMapper.getPlan(id);
     }
 
     public List<Plan> getPlanList(String username) {
         return studyMapper.getPlanList(username);
     }
 
-    public void delete(int plan_id) {
-        studyMapper.deletePlan(plan_id);
+    public void checkPlan(Integer id) {
+        if(getPlan(id).isActivate()) {
+            studyMapper.checkPlan(0, id);
+        } else {
+            studyMapper.checkPlan(1, id);
+        }
+
+    }
+
+
+    public void deletePlan(Integer id) {
+        studyMapper.deletePlan(id);
     }
 }
