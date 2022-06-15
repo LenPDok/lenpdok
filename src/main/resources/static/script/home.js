@@ -1,7 +1,7 @@
 const $login = document.getElementById('login');
 let length = 0;
-function showPopup() {window.open("/write_plan", "플래너", "width=400, height=300, left=100, top=50");}
-function showProfile() {window.open("/profile", "플래너", "width=800, height=600, left=100, top=50");}
+function showPopup() {window.open("/write_plan", "플래너", "width=600, height=300, left=100, top=50");}
+function showProfile() {window.open("/profile", "프로필", "width=800, height=600, left=100, top=50");}
 function init() {
     fetch("/api/getPlan", {
         method: 'get',
