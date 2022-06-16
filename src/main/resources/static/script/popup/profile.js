@@ -2,11 +2,10 @@ const $day = ['월', '화', '수', '목', '금', '토', '일'];
 const $graph = document.querySelector('.axis_x');
 
 function getMonday(d) {
-    console.log(d);
     d = new Date(d);
     let day = d.getDay(),
         diff = d.getDate() - day + (day == 0 ? -6:1);
-    return new Date(d.setDate(diff)).toISOString().substring(8, 10);
+    return diff;
 }
 
 function init() {
