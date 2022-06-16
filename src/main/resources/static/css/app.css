@@ -256,7 +256,7 @@ body {
   top: 2px;
   left: calc(2px + 50%);
 }
-
+*
 .month-list {
   position: absolute;
   width: 100%;
@@ -300,11 +300,11 @@ body {
 
 @keyframes to-top {
   0% {
-      transform: translateY(100%);
-      opacity: 0;
+    transform: translateY(100%);
+    opacity: 0;
   }
   100% {
-      transform: translateY(0);
-      opacity: 1;
+    transform: translateY(0);
+    opacity: 1;
   }
 }

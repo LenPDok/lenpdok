@@ -6,132 +6,162 @@
   <link rel="stylesheet" type="text/css" href="/css/style.css"> <!-- css 참조-->
 </head>
 <body>
-<div class="wrap">
-  <div class="intro_bg">
-    <div class="header" id="link_header">
-      <ul class="nav">
-        <li><a href="#link_header">HOME</a></li>
-        <li><a href="#link_main_text0">ABOUT</a></li>
-        <li><a href="#link_main_text1">CALANDER</a></li>
-        <li><a href="#link_main_text2">CONTACT</a></li>
-        <li id="username"><button id="login">login</button></li>
-      </ul>
-    </div>
-    <div class="intro_text">
-      <h1>랜 프 독</h1>
-      <h4 class="contents1">공부 글귀</h4>
+  <div class="wrap">
+    <div class="intro_bg">
+      <div class="header" id="link_header">
+        <ul class="nav">
+          <li><a href="#link_header">HOME</a></li>
+          <li><a href="#link_main_text0">ABOUT</a></li>
+          <li><a href="#link_main_text1">CALANDER</a></li>
+          <li><a href="#link_main_text2">CONTACT</a></li>
+          <li id="username"><button id="login">login</button></li>
+        </ul>
+      </div>
+      <div class="intro_text">
+        <h1>랜 프 독</h1>
+        <h4 class="contents1">공부 글귀</h4>
+      </div>
     </div>
   </div>
-</div>
-<!-- intro end-->
-<ul class="amount">
-  <li>
-    <div>
-      <div class="contents1">오늘 공부해야 할 것</div>
-      <div class="result" id="planCnt">로그인 해주세요.</div>
-    </div>
-  </li>
-  <li>
-    <div>
-      <div class="contents1">순 공부 시간</div>
-      <div class="result" id="studyTime">공부기록이 없습니다.</div>
-    </div>
-  </li>
-  <li>
-    <div>
-      <div class="contents1">공부 시작</div>
-      <div class="more">
-        공부하기
-      </div>
-    </div>
-  </li>
-</ul>
-<!-- amount end -->
 
-<div class="main_text0" id="link_main_text0"> <!-- 상단에 About 버튼을 눌렀을 떄 이리 오도록-->
-  <h1>ABOUT</h1>
-  <!-- <div class="contents1">우리는 재규어처럼 재빠르게, 남들과는 다르게 오징어를 낚아챕니다.</div> -->
-
-  <ul class="icons">
+  <ul class="amount">
     <li>
-      <div class="icon_img">
-        <img src="/image/icon3.png" width="120px" height="120px">
-      </div>
-      <div class="contents1_bold">플래너</div>
-      <div class="contents2">
-        하루 공부 계획을 세워보세요.
-      </div>
-      <div class="more" onclick="showPopup()">
-        계획하기
+      <div>
+        <div class="contents1">오늘 공부해야 할 것</div>
+        <div class="result" id="planCnt">로그인 해주세요.</div>
       </div>
     </li>
-
     <li>
-      <div class="icon_img">
-        <img src="/image/icon0.svg">
-      </div>
-      <div class="contents1_bold">프로필</div>
-      <div class="contents2">
-        공부량을 확인해보아요.
-      </div>
-      <div class="more" onclick="showProfile();">
-        프로필
+      <div>
+        <div class="contents1">순 공부 시간</div>
+        <div class="result" id="studyTime">공부기록이 없습니다.</div>
       </div>
     </li>
-
     <li>
-      <div class="icon_img">
-        <img src="/image/icon4.png" width="120px" height="120px">
-      </div>
-      <div class="contents1_bold">커뮤니티</div>
-      <div class="contents2">
-        다른 사람들과 정보를 공유해 보아요
-      </div>
-      <div class ="more" onClick="location.href='/community/board'">
-        MORE
+      <div>
+        <div class="contents1">공부 시작</div>
+        <div class="more">
+          공부하기
+        </div>
       </div>
     </li>
   </ul>
-</div>
 
-<div class="main_text1" id="link_main_text1">
-  <h1>CALANDER</h1>
-  <div class="contents1">나만의 시험일정을 기록해 보아요</div>
-  <div class="service">
-    <div class="food_photo" >
-      <iframe src="https://calendar.google.com/calendar/embed?height=400&wkst=1&bgcolor=%23ffffff&ctz=Asia%2FSeoul&showTitle=0&showCalendars=0&showPrint=0&showTz=0&showTabs=0&showNav=0&title=%20&mode=MONTH&src=YWRkcmVzc2Jvb2sjY29udGFjdHNAZ3JvdXAudi5jYWxlbmRhci5nb29nbGUuY29t&src=a28uc291dGhfa29yZWEjaG9saWRheUBncm91cC52LmNhbGVuZGFyLmdvb2dsZS5jb20&color=%2333B679&color=%230B8043" style="border-width:0" width="600" height="400" frameborder="0" scrolling="yes"></iframe>
-    </div>
-    <div class="contents2">
+  <div class="main_text0" id="link_main_text0"> <!-- 상단에 About 버튼을 눌렀을 떄 이리 오도록-->
+    <h1>ABOUT</h1>
+    <ul class="icons">
+      <li>
+        <div class="icon_img">
+          <img src="/image/icon3.png" width="120px" height="120px">
+        </div>
+        <div class="contents1_bold">플래너</div>
+        <div class="contents2">
+          하루 공부 계획을 세워보세요.
+        </div>
+        <div class="more" onclick="showPopup()">
+          계획하기
+        </div>
+      </li>
 
-    </div>
+      <li>
+        <div class="icon_img">
+          <img src="/image/icon0.svg">
+        </div>
+        <div class="contents1_bold">프로필</div>
+        <div class="contents2">
+          공부량을 확인해보아요.
+        </div>
+        <div class="more" onclick="showProfile();">
+          프로필
+        </div>
+      </li>
+
+      <li>
+        <div class="icon_img">
+          <img src="/image/icon4.png" width="120px" height="120px">
+        </div>
+        <div class="contents1_bold">커뮤니티</div>
+        <div class="contents2">
+          다른 사람들과 정보를 공유해 보아요
+        </div>
+        <div class ="more" onClick="location.href='/community/board'">
+          MORE
+        </div>
+      </li>
+    </ul>
   </div>
-</div>
 
-<div class="main_text2" id="link_main_text2">
-  <ul>
-    <li>
-      <div><h1>CONTACT</h1></div>
-      <div class="more2">
-        캡스톤 디자인 6조 <br>
-        고득준 김민석 이선민 박나연 <br>
-        <!-- 02 - 223 -2912~5 <br> -->
-        <!-- COPYRIGHT 2019. TAMO. ALL RIGHT RESERVED. -->
+  <div class="main_text1" id="link_main_text1">
+    <h1>CALENDAR</h1>
+    <div class="contents1" style="margin-bottom: 30px;">나만의 시험일정을 기록해 보아요</div>
+    <div style="display: flex;">
+      <div class="light" style="width: 50%; text-align: -webkit-center;">
+        <div class="calendar">
+          <div class="calendar-header">
+            <span class="month-picker" id="month-picker">February</span>
+            <div class="year-picker">
+                        <span class="year-change" id="prev-year">
+                            <pre><</pre>
+                        </span>
+              <span id="year">2021</span>
+              <span class="year-change" id="next-year">
+                            <pre>></pre>
+                        </span>
+            </div>
+          </div>
+          <div class="calendar-body">
+            <div class="calendar-week-day">
+              <div>일</div>
+              <div>월</div>
+              <div>화</div>
+              <div>수</div>
+              <div>목</div>
+              <div>금</div>
+              <div>토</div>
+            </div>
+            <div class="calendar-days"></div>
+          </div>
+          <div class="month-list"></div>
+        </div>
       </div>
-    </li>
-    <li></li>
-  </ul>
-</div>
 
-<div class="footer">
-  <div>감사합니다</div>
-  <div>
-    캡스톤 디자인 6조 <br>
-    고득준 김민석 이선민 박나연 <br>
-    <!-- 02 - 223 -2912~5 <br> -->
-    <!-- COPYRIGHT 2019. TAMO. ALL RIGHT RESERVED. -->
+      <div class="contents2">
+        <h2>6월 시험일정</h2>
+        10일> 컴활자격증<br>
+        - 장소 : 제주고등학교 <br>
+        - 시간 : 오전 11시<br><br>
+        18일> OPIC 시험 <br>
+        - 장소 : 제주관광대학교<br>
+        - 시간 : 오전 10시<br><br>
+        25일> 토익 스피킹 <br>
+        - 장소 : 제주관광대학교<br>
+        - 시간 : 오후 2시<br>
+      </div>
+    </div>
+  </div>
+
+  <div class="main_text2" id="link_main_text2">
+    <ul>
+      <li>
+        <div><h1>CONTACT</h1></div>
+        <div class="more2">
+          캡스톤 디자인 6조 <br>
+          고득준 김민석 이선민 박나연 <br>
+        </div>
+      </li>
+      <li></li>
+    </ul>
+  </div>
+
+  <div class="footer">
+    <div>감사합니다</div>
+    <div>
+      캡스톤 디자인 6조 <br>
+      고득준 김민석 이선민 박나연 <br>
+    </div>
   </div>
 </div>
-</div>
+<script src="/script/calendar.js"></script>
 <script src="/script/home.js"></script>
 </body>
 </html>

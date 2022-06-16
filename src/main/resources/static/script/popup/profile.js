@@ -18,7 +18,7 @@ function init() {
         }
     }).then(res => res.json())
     .then(studyTime => {
-        let day = parseInt(getMonday(new Date())) + 1;
+        let day = parseInt(getMonday(new Date()));
         let index = 0;
         let str = '';
         let time = 0;

@@ -1,11 +1,26 @@
+body {
+    margin: 30px;
+}
+
 f {
     font-size : 20px;
     font-weight: 700;
 }
+
 g {
     font-size : 15px;
     font-weight: 700;
     margin-left: 10px;
+}
+img{
+    width: 200px;
+
+}
+h2{
+    text-align: left;
+}
+div{
+    text-align: left;
 }
 ul,li{
        list-style:none;
@@ -22,6 +37,13 @@ ul,li{
     position:relative;
 }
 .chart_box{
+    position:relative;
+    margin-bottom:45px;
+    padding-left:20px;
+    box-sizing:border-box;
+    height:200px;
+}
+chart_box{
     position:relative;
     margin-bottom:45px;
     padding-left:20px;
@@ -72,6 +94,7 @@ ul,li{
     flex:1;
     position:relative;
 }
+
 .text_box{
     position:absolute;
     bottom:-43px;
@@ -80,7 +103,8 @@ ul,li{
     -webkit-transform:translate(-50%,0);
     -ms-transform:translate(-50%,0);
     -o-transform:translate(-50%,0);
-    transform:translate(-50%,0); }
+    transform:translate(-50%,0);
+}
 
 .day{
     display:block;

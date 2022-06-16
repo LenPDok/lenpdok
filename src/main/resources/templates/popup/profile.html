@@ -1,50 +1,60 @@
 <html>
 <head>
  <title> 프로필 </title>
-  <link rel="stylesheet" href="/css/profile.css">
+    <link rel="stylesheet" href="/css/profile.css">
+    <link rel="stylesheet" href="/examples/media/expand_style.css">
 </head>
 
-<body onload="window.resizeTo(800, 600)">
+<body onload="window.resizeTo(900, 600)">
 
 <div style="text-align: center;">
   <h1> 프로필 </h1>
 </div>
-    <p><span style="border-left: 12px solid #dcf1fb; padding: 0 0 0  0.2em;">
-       <f>주간 학습량</f>  </span>
-    </p>
-   <div>
-    <div style="padding-bottom: 10px;">
-        <g>총 공부량</g>
-        <g id="total"></g>
+<div style="display: flex;">
+    <div style="padding: 0 30px 30px 0; border-right: 1px solid #000000;">
+        <div style="text-align: center;">
+        <span style="font:italic bold 1.5em/1em Georgia, serif;">
+          <strong>seonmin's profile</strong>
+        </span>
+        </div>
+        <br /><br />
+        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRTDY76LxawnvUDR-sRv9cpgB2R9zhXEBP7Pw&usqp=CAU" />
     </div>
-    <div> 
-        <g>평균 공부량</g>
-        <g id="average"></g>
-    </div> 
-   </div>
-
-   <p><span style="border-left: 12px solid #dcf1fb; padding: 0 0 0  0.2em;">
-    <f>요일별 공부시간</f>  </span>
- </p>
- 
- <br>
-
-  <div class="vertical_chart_box">
-    <div class="chart_box">
-      <ul class="axis_y">
-        <li class="item">0<span class="blind">시간</span></li>
-        <li class="item">3<span class="blind">시간</span></li>
-        <li class="item">6<span class="blind">시간</span></li>
-        <li class="item">9<span class="blind">시간</span></li>
-        <li class="item">12<span class="blind">시간</span></li>
-      </ul>
-      <ul class="axis_x">
-
-      </ul>
-    </div>                                                 
-  </div>
-<br><br>
-
+    <div style="padding-left: 50px;">
+        <h2 style="text-align: center; margin-bottom: 80px;">주간 공부량</h2>
+        <div style="display: flex;">
+            <div>
+                <div style="width: 150px; margin-bottom: 20px; text-align: center; margin-right: 20px;"><f>&nbsp&nbsp순 공부량</f></div>
+                <div style="text-align: center;">
+                    <span id="total" style="padding: 0 10px; text-align: center; border: 1px solid #000000; border-radius: 6px;"></span>
+                </div>
+            </div>
+            <div>
+                <div style="width: 150px; margin-bottom: 20px; text-align: center;"><f>평균 공부량</f></div>
+                <div style="text-align: center;">
+                    <span id="average" style="padding: 0 10px; text-align: center; border: 1px solid #000000; border-radius: 6px;"></span>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<hr style="margin-top: 0;"/>
+<div>
+    <div style="margin: 20px 0;"><f>요일별 공부량</f></div>
+    <div class="vertical_chart_box">
+        <div class="chart_box">
+            <ul class="axis_y">
+                <li class="item">0<span class="blind">시간</span></li>
+                <li class="item">3<span class="blind">시간</span></li>
+                <li class="item">6<span class="blind">시간</span></li>
+                <li class="item">9<span class="blind">시간</span></li>
+                <li class="item">12<span class="blind">시간</span></li>
+            </ul>
+            <ul class="axis_x">
+            </ul>
+        </div>
+    </div>
+</div>
 <script src="/script/popup/profile.js"></script>
 </body>
 
